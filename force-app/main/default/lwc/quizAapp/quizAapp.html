@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Quiz App">
+        
+        <div class="slds-var-m-around_medium">
+            <template if:true={isSubmitted}>
+                <div class={isScoredFull}>You have Scored {correctAnswers} out of {myQuestions.length}!</div>
+            </template>
+            <form>
+                <template for:each={myQuestions} for:item="questions">
+                    <div key={questions.id} class="slds-var-m-bottom_large">
+                        <div><strong>{questions.id} :</strong></div>
+                        <div class="slds-var-m-bottom_medium">{questions.question}</div>
+    
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                                <input class="slds-m-right_medium" type="radio" name={questions.id} value="a" onchange={changeHandler}/>
+                                <span>{questions.answers.a}</span>
+                            </div>
+                            <div class="slds-col">
+                                <input class="slds-m-right_medium" type="radio" name={questions.id} value="b" onchange={changeHandler}/>
+                                <span>{questions.answers.b}</span>
+                            </div>
+                            <div class="slds-col">
+                                <input class="slds-m-right_medium" type="radio" name={questions.id} value="c" onchange={changeHandler}/>
+                                <span>{questions.answers.c}</span>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <lightning-button 
+                    variant="brand" 
+                    label="Reset" 
+                    title="Reset" 
+                    onclick={handleReset} 
+                    class="slds-var-m-left_x-small">
+                </lightning-button>
+            
+                <lightning-button 
+                    variant="Success" 
+                    label="Submit" 
+                    title="Submit" 
+                    onclick={handleSubmit} 
+                    disabled={allAreNotSelected}
+                    class="slds-var-m-left_x-small">
+                </lightning-button>
+            </form>
+            
+        </div>
+    </lightning-card>
+</template>
